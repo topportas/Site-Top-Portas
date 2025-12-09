@@ -1,10 +1,11 @@
+
 import React from 'react';
 import { Phone, Instagram, Youtube, MapPin } from 'lucide-react';
 import { WHATSAPP_LINK } from '../constants';
 
 const Header: React.FC = () => {
   return (
-    <header className="w-full bg-white shadow-sm sticky top-0 z-50">
+    <header className="w-full bg-white shadow-[0_4px_20px_-5px_rgba(15,54,82,0.3)] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo Area - Top Left */}

@@ -1,3 +1,4 @@
+
 import { LucideIcon } from "lucide-react";
 
 export interface ServiceItem {
@@ -6,6 +7,8 @@ export interface ServiceItem {
   Icon: LucideIcon;
   cta: string;
   link?: string;
+  backgroundImage: string;
+  galleryImages: string[];
 }
 
 export interface ClientLogo {

@@ -1,3 +1,4 @@
+
 import { Factory, Wrench, Clock } from "lucide-react";
 import { ServiceItem, ClientLogo } from "./types";
 
@@ -12,21 +13,40 @@ export const SERVICES: ServiceItem[] = [
     description: "Nós fabricamos portas sob medida! Nossa equipe vai até o local, tira as medidas, analisa detalhes para a instalação completa, cria o projeto, fabrica sob medida e instalamos no local, com garantia.",
     Icon: Factory,
     cta: "Solicitar um orçamento agora!",
-    link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quero+um+projeto+para+fabrica%C3%A7%C3%A3o+da+porta+de+a%C3%A7o...&type=phone_number&app_absent=0"
+    link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quero+um+projeto+para+fabrica%C3%A7%C3%A3o+da+porta+de+a%C3%A7o...&type=phone_number&app_absent=0",
+    backgroundImage: "https://images.unsplash.com/photo-1531688487888-03f95bbf8c5c?auto=format&fit=crop&q=80&w=1000", // fabricacao-capa.jpg
+    galleryImages: [
+      "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&q=80&w=800", // fabricacao-01.jpg
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800", // fabricacao-02.jpg
+      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800", // fabricacao-03.jpg
+      "https://images.unsplash.com/photo-1531688487888-03f95bbf8c5c?auto=format&fit=crop&q=80&w=800", // fabricacao-04.jpg
+    ]
   },
   {
     title: "INSTALAÇÃO",
     description: "Para quem deseja apenas a instalação, nossa equipe vai até o local, para garantir que a porta seja instalada seguindo 100% os padrões de qualidade, evitando problemas futuros.",
     Icon: Wrench,
     cta: "Solicitar um orçamento agora!",
-    link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quanto+%C3%A9+para+instalar+uma+porta+de+a%C3%A7o+aqui+para+mim%3F&type=phone_number&app_absent=0"
+    link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quanto+%C3%A9+para+instalar+uma+porta+de+a%C3%A7o+aqui+para+mim%3F&type=phone_number&app_absent=0",
+    backgroundImage: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80&w=1000", // instalacao-capa.jpg
+    galleryImages: [
+      "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80&w=800", // instalacao-01.jpg
+      "https://images.unsplash.com/photo-1621905252507-b35492cc7471?auto=format&fit=crop&q=80&w=800", // instalacao-02.jpg
+      "https://images.unsplash.com/photo-1581093588401-fbb62a02f138?auto=format&fit=crop&q=80&w=800", // instalacao-03.jpg
+    ]
   },
   {
     title: "PLANTÃO 24H/7D",
     description: "É urgente? Não se desespere, temos um time de plantão 24 horas para atender Goiânia e região em qualquer dia da semana, é só ligar que iremos até você!",
     Icon: Clock,
     cta: "Solicitar um orçamento agora!",
-    link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Solicito+a+equipe+de+plant%C3%A3o+que+concerte+minha+porta+de+a%C3%A7o...&type=phone_number&app_absent=0"
+    link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Solicito+a+equipe+de+plant%C3%A3o+que+concerte+minha+porta+de+a%C3%A7o...&type=phone_number&app_absent=0",
+    backgroundImage: "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&q=80&w=1000", // plantao-capa.jpg
+    galleryImages: [
+      "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&q=80&w=800", // plantao-01.jpg
+      "https://images.unsplash.com/photo-1495578942265-36477e84a779?auto=format&fit=crop&q=80&w=800", // plantao-02.jpg
+      "https://images.unsplash.com/photo-1506544777-64cfbe1142df?auto=format&fit=crop&q=80&w=800", // plantao-03.jpg
+    ]
   }
 ];
 
@@ -40,6 +60,7 @@ const GOIANIA_SHOPPING_LOGO = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo
 
 // BURITI SHOPPING: Stylized Fan/Palm Icon + Text
 const BURITI_SHOPPING_LOGO = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgODAiPgogIDxwYXRoIGQ9Ik0yMCA2MCBMMjAgNDAgUTQ1IDEwIDcwIDQwIEw3MCA2MCBaIiBmaWxsPSJibGFjayIvPgogIDx0ZXh0IHg9Ijg1IiB5PSI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iYmxhY2siPkJ1cml0aTwvdGV4dD4KICA8dGV4dCB4PSI4NSIgeT0iNzAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjMwMCIgZmlsbD0iYmxhY2siPlNob3BwaW5nPC90ZXh0Pgo8L3N2Zz4=";
+
 
 export const CLIENTS: ClientLogo[] = [
   { name: "Nike", url: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" },
