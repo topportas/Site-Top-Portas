@@ -14,12 +14,13 @@ export const SERVICES: ServiceItem[] = [
     Icon: Factory,
     cta: "Solicitar um orçamento agora!",
     link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quero+um+projeto+para+fabrica%C3%A7%C3%A3o+da+porta+de+a%C3%A7o...&type=phone_number&app_absent=0",
-    backgroundImage: "https://images.unsplash.com/photo-1531688487888-03f95bbf8c5c?auto=format&fit=crop&q=80&w=1000", // fabricacao-capa.jpg
+    // Local image reference
+    backgroundImage: "/images/fabricacao-capa.jpg", 
     galleryImages: [
-      "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&q=80&w=800", // fabricacao-01.jpg
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800", // fabricacao-02.jpg
-      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800", // fabricacao-03.jpg
-      "https://images.unsplash.com/photo-1531688487888-03f95bbf8c5c?auto=format&fit=crop&q=80&w=800", // fabricacao-04.jpg
+      "/images/fabricacao-1.jpg",
+      "/images/fabricacao-2.jpg",
+      "/images/fabricacao-3.jpg",
+      "/images/fabricacao-4.jpg",
     ]
   },
   {
@@ -28,11 +29,12 @@ export const SERVICES: ServiceItem[] = [
     Icon: Wrench,
     cta: "Solicitar um orçamento agora!",
     link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quanto+%C3%A9+para+instalar+uma+porta+de+a%C3%A7o+aqui+para+mim%3F&type=phone_number&app_absent=0",
-    backgroundImage: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80&w=1000", // instalacao-capa.jpg
+    // Local image reference
+    backgroundImage: "/images/instalacao-capa.jpg",
     galleryImages: [
-      "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80&w=800", // instalacao-01.jpg
-      "https://images.unsplash.com/photo-1621905252507-b35492cc7471?auto=format&fit=crop&q=80&w=800", // instalacao-02.jpg
-      "https://images.unsplash.com/photo-1581093588401-fbb62a02f138?auto=format&fit=crop&q=80&w=800", // instalacao-03.jpg
+      "/images/instalacao-1.jpg",
+      "/images/instalacao-2.jpg",
+      "/images/instalacao-3.jpg",
     ]
   },
   {
@@ -41,11 +43,12 @@ export const SERVICES: ServiceItem[] = [
     Icon: Clock,
     cta: "Solicitar um orçamento agora!",
     link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Solicito+a+equipe+de+plant%C3%A3o+que+concerte+minha+porta+de+a%C3%A7o...&type=phone_number&app_absent=0",
-    backgroundImage: "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&q=80&w=1000", // plantao-capa.jpg
+    // Local image reference
+    backgroundImage: "/images/plantao-capa.jpg",
     galleryImages: [
-      "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&q=80&w=800", // plantao-01.jpg
-      "https://images.unsplash.com/photo-1495578942265-36477e84a779?auto=format&fit=crop&q=80&w=800", // plantao-02.jpg
-      "https://images.unsplash.com/photo-1506544777-64cfbe1142df?auto=format&fit=crop&q=80&w=800", // plantao-03.jpg
+      "/images/plantao-1.jpg",
+      "/images/plantao-2.jpg",
+      "/images/plantao-3.jpg",
     ]
   }
 ];

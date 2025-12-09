@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Phone } from 'lucide-react';
 import { WHATSAPP_DISPLAY, WHATSAPP_LINK } from '../constants';
@@ -46,7 +47,7 @@ const Hero: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent z-10 lg:hidden h-24"></div>
             
             <img 
-              src="https://picsum.photos/800/800?grayscale" 
+              src="/images/hero-banner.jpg" 
               alt="Porta de Aço Industrial" 
               className="w-full h-full object-cover"
             />
