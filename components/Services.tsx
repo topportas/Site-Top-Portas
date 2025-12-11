@@ -1,20 +1,28 @@
 
 import React, { useState } from 'react';
 import { SERVICES } from '../constants';
-import { X, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Minimize2 } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 const Services: React.FC = () => {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const openGallery = (service: ServiceItem) => {
     setSelectedService(service);
     setCurrentImageIndex(0);
+    setIsFullScreen(false);
   };
 
   const closeGallery = () => {
     setSelectedService(null);
+    setIsFullScreen(false);
+  };
+
+  const toggleFullScreen = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsFullScreen(!isFullScreen);
   };
 
   const nextImage = (e: React.MouseEvent) => {
@@ -33,16 +41,35 @@ const Services: React.FC = () => {
     );
   };
 
+  // Helper to extract filename and format it for display
+  const getImageDescription = (url: string) => {
+    try {
+      // Decode the URL (e.g. %20 -> space)
+      const decodedUrl = decodeURIComponent(url);
+      // Get the last part after slash
+      const filename = decodedUrl.split('/').pop();
+      // Remove extension and return
+      return filename?.replace(/\.(png|jpg|jpeg)$/i, '') || 'Imagem da Galeria';
+    } catch (e) {
+      return 'Imagem da Galeria';
+    }
+  };
+
   return (
     <>
       <section className="py-20 bg-white">
+        {/* Title Added Here */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-brand-dark">Nossos Serviços</h2>
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {SERVICES.map((service, index) => (
               <div 
                 key={index} 
                 onClick={() => openGallery(service)}
-                className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center h-full group cursor-pointer h-[500px]"
+                className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center group cursor-pointer h-[400px] bg-gray-900"
               >
                 {/* Background Image with Blur */}
                 <div className="absolute inset-0 z-0">
@@ -51,8 +78,8 @@ const Services: React.FC = () => {
                     alt={service.title} 
                     className="w-full h-full object-cover blur-[2px] scale-105 group-hover:scale-110 transition-transform duration-700"
                   />
-                  {/* Navy Blue Overlay with Opacity */}
-                  <div className="absolute inset-0 bg-brand-dark/80 mix-blend-multiply transition-opacity duration-300 group-hover:bg-brand-dark/90"></div>
+                  {/* Gradient Overlay: Dark top -> Transparent middle -> Dark bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/90 via-brand-dark/40 to-brand-dark/90 opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
                 </div>
 
                 {/* Content */}
@@ -71,17 +98,12 @@ const Services: React.FC = () => {
                   </p>
 
                   <div className="mt-auto w-full space-y-3">
-                    <div className="flex justify-center items-center gap-2 text-white/80 text-xs font-semibold uppercase tracking-wider mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                       <ImageIcon className="w-4 h-4" />
-                       Ver Galeria de Fotos
-                    </div>
-
                     <a 
                       href={service.link}
                       onClick={(e) => e.stopPropagation()} // Prevent opening gallery when clicking CTA
                       target="_blank"
                       rel="noreferrer"
-                      className="block w-full bg-white text-brand-dark text-sm font-bold py-4 px-6 rounded hover:bg-brand-accent hover:text-brand-dark transition-all transform active:scale-95 shadow-lg"
+                      className="block w-full bg-white text-brand-dark text-sm font-bold py-4 px-6 rounded hover:bg-brand-dark hover:text-white transition-all transform active:scale-95 shadow-lg border border-transparent hover:border-white/20"
                     >
                       {service.cta}
                     </a>
@@ -95,44 +117,87 @@ const Services: React.FC = () => {
 
       {/* Lightbox Modal */}
       {selectedService && (
-        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className={`fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 ${isFullScreen ? 'z-[120]' : 'z-[100]'}`}>
+          
+          {/* Close Button (Top Right) - Hidden on mobile if fullscreen */}
           <button 
             onClick={closeGallery}
-            className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-[110]"
+            className={`absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-[130] ${isFullScreen ? 'hidden md:block' : ''}`}
+            title="Fechar Galeria"
           >
             <X className="w-8 h-8" />
           </button>
+          
+          {/* Gallery Title (Only visible in normal mode) */}
+          {!isFullScreen && (
+            <div className="absolute top-4 left-4 sm:left-8 z-[110]">
+               <h3 className="text-white text-xl font-bold uppercase tracking-wider border-l-4 border-brand-accent pl-3">
+                 {selectedService.title}
+               </h3>
+               <span className="text-gray-400 text-sm ml-4">Galeria de Fotos</span>
+            </div>
+          )}
 
-          <div className="relative w-full max-w-5xl aspect-video flex items-center justify-center">
+          <div className={`relative w-full flex items-center justify-center flex-col transition-all duration-300 ${isFullScreen ? 'h-screen' : 'max-w-5xl aspect-video'}`}>
             {selectedService.galleryImages.length > 0 ? (
               <>
-                <img 
-                  src={selectedService.galleryImages[currentImageIndex]} 
-                  alt={`${selectedService.title} - ${currentImageIndex + 1}`}
-                  className="max-h-[85vh] max-w-full object-contain rounded-md shadow-2xl"
-                />
+                <div className={`relative flex justify-center items-center w-full ${isFullScreen ? 'h-full' : 'h-auto'}`}>
+                  <img 
+                    src={selectedService.galleryImages[currentImageIndex]} 
+                    alt={`${selectedService.title} - ${currentImageIndex + 1}`}
+                    onClick={toggleFullScreen}
+                    className={`
+                      cursor-zoom-in rounded-md shadow-2xl transition-all duration-300
+                      ${isFullScreen 
+                        ? 'max-w-screen max-h-screen w-full h-full object-contain cursor-zoom-out rounded-none' 
+                        : 'max-h-[70vh] max-w-full object-contain'
+                      }
+                    `}
+                  />
+                  
+                  {/* Close Fullscreen Button floating on image if fullscreen - Hidden on mobile */}
+                  {isFullScreen && (
+                    <button
+                        onClick={toggleFullScreen}
+                        className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full hidden md:block"
+                    >
+                        <Minimize2 className="w-6 h-6" />
+                    </button>
+                  )}
+                </div>
                 
-                {/* Navigation Buttons */}
+                {/* Navigation Buttons - Hidden on mobile if fullscreen */}
                 {selectedService.galleryImages.length > 1 && (
                   <>
                     <button 
                       onClick={prevImage}
-                      className="absolute left-2 md:-left-12 p-2 bg-black/50 hover:bg-white/20 rounded-full text-white transition-colors"
+                      className={`absolute left-2 p-2 bg-black/50 hover:bg-white/20 rounded-full text-white transition-colors top-1/2 -translate-y-1/2 ${isFullScreen ? 'z-[130] md:left-4 hidden md:block' : 'md:-left-12'}`}
                     >
                       <ChevronLeft className="w-8 h-8" />
                     </button>
                     <button 
                       onClick={nextImage}
-                      className="absolute right-2 md:-right-12 p-2 bg-black/50 hover:bg-white/20 rounded-full text-white transition-colors"
+                      className={`absolute right-2 p-2 bg-black/50 hover:bg-white/20 rounded-full text-white transition-colors top-1/2 -translate-y-1/2 ${isFullScreen ? 'z-[130] md:right-4 hidden md:block' : 'md:-right-12'}`}
                     >
                       <ChevronRight className="w-8 h-8" />
                     </button>
                   </>
                 )}
 
-                {/* Counter */}
-                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-white font-medium tracking-widest text-sm bg-black/30 px-4 py-1 rounded-full">
-                  {currentImageIndex + 1} / {selectedService.galleryImages.length} • {selectedService.title}
+                {/* Caption and Counter Area (Below Image) */}
+                <div className={`flex flex-col items-center mt-4 transition-opacity duration-300 ${isFullScreen ? 'absolute bottom-8 left-0 right-0 z-[130] bg-black/60 py-2' : ''}`}>
+                    
+                    {/* Caption */}
+                    <span className="text-white text-base sm:text-lg font-medium tracking-wide mb-1 text-center px-4">
+                       {getImageDescription(selectedService.galleryImages[currentImageIndex])}
+                    </span>
+
+                    {/* Counter */}
+                    <span className="text-gray-400 font-mono text-sm bg-white/10 px-3 py-0.5 rounded-full">
+                      {currentImageIndex + 1} / {selectedService.galleryImages.length}
+                    </span>
+                    
+                    {/* Removed instruction text "Clique na imagem..." as requested */}
                 </div>
               </>
             ) : (

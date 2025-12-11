@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { CLIENTS } from '../constants';
 
@@ -35,6 +36,7 @@ const LogoItem: React.FC<{ name: string; url: string }> = ({ name, url }) => {
           src={url} 
           alt={name} 
           loading="lazy"
+          decoding="async"
           referrerPolicy="no-referrer"
           // grayscale + brightness-0 turns any color logo into a solid black silhouette
           // opacity-70 makes it slightly subtle, hover brings it to full black

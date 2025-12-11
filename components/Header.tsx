@@ -1,35 +1,20 @@
 
 import React from 'react';
 import { Phone, Instagram, Youtube, MapPin } from 'lucide-react';
-import { WHATSAPP_LINK } from '../constants';
+import { WHATSAPP_LINK, LOGO_URL } from '../constants';
 
 const Header: React.FC = () => {
   return (
     <header className="w-full bg-white shadow-[0_4px_20px_-5px_rgba(15,54,82,0.3)] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo Area - Top Left */}
-          <div className="flex-shrink-0 flex items-center gap-3">
-            {/* SVG Logo Construction based on "3 modelos" description */}
-            <div className="flex items-center h-12">
-               {/* Icon Part */}
-               <svg width="50" height="45" viewBox="0 0 50 45" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
-                  {/* Outer Frame */}
-                  <rect x="1" y="1" width="48" height="43" stroke="#0f3652" strokeWidth="4" fill="none"/>
-                  {/* Inner Garage Lines */}
-                  <rect x="8" y="8" width="34" height="29" fill="#0f3652"/>
-                  <line x1="8" y1="14" x2="42" y2="14" stroke="white" strokeWidth="2"/>
-                  <line x1="8" y1="20" x2="42" y2="20" stroke="white" strokeWidth="2"/>
-                  <line x1="8" y1="26" x2="42" y2="26" stroke="white" strokeWidth="2"/>
-                  <line x1="8" y1="32" x2="42" y2="32" stroke="white" strokeWidth="2"/>
-               </svg>
-               
-               {/* Text Part */}
-               <div className="flex flex-col justify-center h-full">
-                  <span className="text-[#0f3652] font-black text-3xl leading-none tracking-tighter">TOP</span>
-                  <span className="text-[#0f3652] font-bold text-[11px] leading-none tracking-wide mt-0.5">PORTAS DE AÇO</span>
-               </div>
-            </div>
+          {/* Logo Area - Aligned Left */}
+          <div className="flex-shrink-0 flex items-center justify-start">
+             <img 
+               src={LOGO_URL} 
+               alt="Top Portas de Aço" 
+               className="h-16 w-auto object-contain object-left"
+             />
           </div>
 
           {/* Icons - Visible on Mobile (smaller) and Desktop */}

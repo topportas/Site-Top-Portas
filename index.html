@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -41,6 +42,12 @@
         display: flex;
         width: max-content;
         animation: scroll 40s linear infinite;
+        /* Performance optimizations for smooth scrolling */
+        will-change: transform;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
       /* Animating 3 sets: move by 1/3 of total width */
       @keyframes scroll {

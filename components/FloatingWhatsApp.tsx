@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { WHATSAPP_LINK } from '../constants';
 
@@ -39,8 +40,8 @@ const FloatingWhatsApp: React.FC = () => {
       className="fixed right-6 z-40 group transition-all duration-100 ease-out hover:-translate-y-1"
       aria-label="Chat on WhatsApp"
     >
-      {/* Tooltip */}
-      <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-white px-3 py-1.5 rounded shadow-md text-xs font-bold text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block">
+      {/* Tooltip - Always visible now */}
+      <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-white px-3 py-1.5 rounded shadow-md text-xs font-bold text-gray-600 opacity-100 transition-opacity whitespace-nowrap">
         Orçamento Rápido!
         <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white rotate-45"></div>
       </div>
