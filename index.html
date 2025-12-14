@@ -14,96 +14,28 @@
     <meta property="og:description" content="Especialistas em fabricação, manutenção e plantão 24h de portas de aço em Goiânia e região." />
     <meta property="og:image" content="https://raw.githubusercontent.com/topportas/Site-Top-Portas/main/LOGO%20TOP%20PORTAS%20DE%20A%C3%87O%20Open%20Graph.png" />
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-            colors: {
-              brand: {
-                dark: '#0f3652', // Dark blue from logo
-                light: '#1a4d70',
-                accent: '#eab308', // Gold/Yellow accent if needed
-                whatsapp: '#25D366',
-              }
-            }
-          }
-        }
-      }
-    </script>
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-      }
-      .scroll-container {
-        overflow: hidden;
-        width: 100%;
-        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        /* PERFORMANCE FIX: Tells browser this area is independent, reducing calculation load */
-        contain: layout paint; 
-      }
-      .scroll-content {
-        display: flex;
-        width: max-content; /* Ensure container fits all items in one line */
-        animation: scroll 20s linear infinite; /* Increased speed (reduced time from 45s to 20s) */
-        /* Performance optimizations */
-        will-change: transform;
-        transform: translate3d(0, 0, 0); /* Force GPU acceleration */
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        perspective: 1000px;
-      }
-      
-      /* 
-         Logic: Moving -33.33% because we have 3 sets.
-         When it reaches -33.33%, the first set is gone, and the 2nd set 
-         is exactly where the 1st one started. Instant seamless reset.
-      */
-      @keyframes scroll {
-        0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(-33.3333%, 0, 0); }
-      }
-      
-      /* Card Fade In Animation */
-      .animate-fade-in-up {
-        animation: fadeInUp 0.8s ease-out forwards;
-      }
-      
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
+    
+    <!-- ContentSquare Tracking Script -->
+    <script src="https://t.contentsquare.net/uxa/be0887dcedfe9.js"></script>
   <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
     "vite": "https://esm.sh/vite@^7.2.7",
     "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
-  <!-- ContentSquare Tracking Script -->
-  <script src="https://t.contentsquare.net/uxa/be0887dcedfe9.js"></script>
 </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
