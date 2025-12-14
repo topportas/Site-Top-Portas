@@ -4,8 +4,8 @@ import { Phone, Play, Check } from 'lucide-react';
 import { WHATSAPP_DISPLAY, WHATSAPP_LINK } from '../constants';
 
 const Hero: React.FC = () => {
-  // Using the specific Automatic Door image from the repo to serve as the thumbnail
-  const THUMBNAIL_URL = "https://raw.githubusercontent.com/topportas/Site-Top-Portas/main/Porta%20de%20A%C3%A7o%20Autom%C3%A1tica.png";
+  // Using the local hero-banner image from public/images
+  const THUMBNAIL_URL = "/images/hero-banner.jpg";
 
   return (
     <div className="relative w-full bg-white overflow-hidden">

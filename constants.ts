@@ -10,7 +10,7 @@ export const WHATSAPP_LINK = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUM
 // Base URLs
 const PORTFOLIO_BASE = "https://raw.githubusercontent.com/topportas/Site-Top-Portas/main";
 
-// Logo URL
+// Logo URL (Mantendo remoto por enquanto pois não consta no LEIA-ME local)
 export const LOGO_URL = "https://raw.githubusercontent.com/topportas/Site-Top-Portas/main/LOGO%20TOP%20PORTAS%20DE%20A%C3%87OFINAL.png";
 
 export const SERVICES: ServiceItem[] = [
@@ -20,13 +20,13 @@ export const SERVICES: ServiceItem[] = [
     Icon: Factory,
     cta: "Solicitar um orçamento agora!",
     link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quero+um+projeto+para+fabrica%C3%A7%C3%A3o+da+porta+de+a%C3%A7o...&type=phone_number&app_absent=0",
-    // Capa: Fábrica
-    backgroundImage: `${PORTFOLIO_BASE}/F%C3%A1brica%20de%20Portas%20de%20A%C3%A7o%20em%20Goi%C3%A2nia.png`,
+    // Capa: Fábrica (Local)
+    backgroundImage: "/images/fabricacao-capa.jpg",
     galleryImages: [
-      `${PORTFOLIO_BASE}/F%C3%A1brica%20de%20Portas%20de%20A%C3%A7o%20em%20Goi%C3%A2nia.png`,
-      `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20Perfil%20Fechado.png`,
-      // Moved from Plantão (1/6)
-      `${PORTFOLIO_BASE}/Portas%20de%20Enrolar%20em%20Goi%C3%A2nia.png`,
+      "/images/fabricacao-1.jpg",
+      "/images/fabricacao-2.jpg",
+      "/images/fabricacao-3.jpg",
+      "/images/fabricacao-4.jpg",
     ]
   },
   {
@@ -35,16 +35,12 @@ export const SERVICES: ServiceItem[] = [
     Icon: Wrench,
     cta: "Solicitar um orçamento agora!",
     link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quanto+%C3%A9+para+instalar+uma+porta+de+a%C3%A7o+aqui+para+mim%3F&type=phone_number&app_absent=0",
-    // Capa: Motor (Updated)
-    backgroundImage: `${PORTFOLIO_BASE}/Motor%20para%20Porta%20de%20Enrolar.png`,
+    // Capa: Instalação (Local)
+    backgroundImage: "/images/instalacao-capa.jpg",
     galleryImages: [
-      `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20Autom%C3%A1tica.png`,
-      `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20de%20Enrolar%20Autom%C3%A1tica.png`,
-      `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20de%20Enrolar%20Manual.png`,
-      `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20Eletr%C3%B4nica.png`,
-      `${PORTFOLIO_BASE}/Motor%20para%20Porta%20de%20Enrolar.png`,
-      `${PORTFOLIO_BASE}/Acess%C3%B3rios%20para%20Porta%20de%20Enrolar.png`,
-      `${PORTFOLIO_BASE}/Portas%20de%20A%C3%A7o%20em%20Goi%C3%A2nia.png`,
+      "/images/instalacao-1.jpg",
+      "/images/instalacao-2.jpg",
+      "/images/instalacao-3.jpg",
     ]
   },
   {
@@ -53,16 +49,12 @@ export const SERVICES: ServiceItem[] = [
     Icon: Clock,
     cta: "Solicitar um orçamento agora!",
     link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Solicito+a+equipe+de+plant%C3%A3o+que+concerte+minha+porta+de+a%C3%A7o...&type=phone_number&app_absent=0",
-    // Capa: Porta Transvison (Specific URL requested)
-    backgroundImage: `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20Transvison.png`,
+    // Capa: Plantão (Local)
+    backgroundImage: "/images/plantao-capa.jpg",
     galleryImages: [
-      // Remaining original images
-      `${PORTFOLIO_BASE}/Portas%20de%20Enrolar%20em%20Goi%C3%A2nia%202.png`,
-      `${PORTFOLIO_BASE}/Portas%20de%20Enrolar%20em%20Goi%C3%A2nia%203.png`,
-      `${PORTFOLIO_BASE}/Portas%20de%20Enrolar%20em%20Goi%C3%A2nia%204.png`,
-      // Added specifics from other categories as requested, updated to match background
-      `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20Transvison.png`,
-      `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20de%20Enrolar%20Autom%C3%A1tica.png`,
+      "/images/plantao-1.jpg",
+      "/images/plantao-2.jpg",
+      "/images/plantao-3.jpg",
     ]
   }
 ];

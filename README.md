@@ -4,7 +4,7 @@ Site moderno e responsivo desenvolvido para a **Top Portas de Aço**, especialis
 
 ## 🚀 Tecnologias Utilizadas
 
-- **React 18**: Biblioteca JavaScript para construção da interface.
+- **React 19**: Biblioteca JavaScript para construção da interface.
 - **Tailwind CSS**: Framework de estilização para design moderno e responsivo.
 - **Google Gemini AI**: Integração de Inteligência Artificial para geração de orçamentos automáticos via WhatsApp.
 - **Lucide React**: Ícones leves e modernos.
