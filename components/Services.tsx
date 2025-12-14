@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SERVICES } from '../constants';
 import { X, ChevronLeft, ChevronRight, Minimize2 } from 'lucide-react';
 import { ServiceItem } from '../types';
@@ -8,6 +8,36 @@ const Services: React.FC = () => {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  
+  // Ref for observing elements
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Setup Intersection Observer for animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+            // Unobserve after animation is triggered to ensure it runs only once
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { 
+        threshold: 0, // Trigger as soon as pixel is in margin area
+        rootMargin: '200px' // Trigger 200px BEFORE the element enters the viewport
+      }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const openGallery = (service: ServiceItem) => {
     setSelectedService(service);
@@ -68,22 +98,26 @@ const Services: React.FC = () => {
             {SERVICES.map((service, index) => (
               <div 
                 key={index} 
+                ref={(el) => { if (el) cardsRef.current[index] = el; }}
                 onClick={() => openGallery(service)}
-                className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center group cursor-pointer h-[400px] bg-gray-900"
+                className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center group cursor-pointer h-[400px] bg-gray-900 opacity-0 translate-y-8" // Initial state for animation
+                style={{ animationDelay: `${index * 150}ms` }} // Stagger effect
               >
                 {/* Background Image with Blur */}
                 <div className="absolute inset-0 z-0">
                   <img 
                     src={service.backgroundImage} 
                     alt={service.title} 
-                    className="w-full h-full object-cover blur-[2px] scale-105 group-hover:scale-110 transition-transform duration-700"
+                    loading="eager" // Force eager loading to prevent whitespace
+                    decoding="async"
+                    className={`w-full h-full object-cover blur-[2px] scale-105 group-hover:scale-110 transition-transform duration-700 ${(service.title.includes('PLANTÃO') || service.title.includes('INSTALAÇÃO')) ? 'opacity-60' : 'opacity-100'}`}
                   />
                   {/* Gradient Overlay: Dark top -> Transparent middle -> Dark bottom */}
                   <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/90 via-brand-dark/40 to-brand-dark/90 opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 p-8 flex flex-col items-center h-full w-full">
+                <div className="relative z-10 p-6 md:p-4 lg:p-8 flex flex-col items-center h-full w-full">
                   {/* Icon Container */}
                   <div className="mb-6 p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full transition-all duration-300 group-hover:scale-110 group-hover:bg-white/20">
                     <service.Icon strokeWidth={1.5} className="w-16 h-16 text-white" />
@@ -103,7 +137,7 @@ const Services: React.FC = () => {
                       onClick={(e) => e.stopPropagation()} // Prevent opening gallery when clicking CTA
                       target="_blank"
                       rel="noreferrer"
-                      className="block w-full bg-white text-brand-dark text-sm font-bold py-4 px-6 rounded hover:bg-brand-dark hover:text-white transition-all transform active:scale-95 shadow-lg border border-transparent hover:border-white/20"
+                      className="block w-full bg-white text-brand-dark text-sm md:text-xs lg:text-sm font-bold py-4 px-6 md:px-2 lg:px-6 rounded hover:bg-brand-dark hover:text-white transition-all transform active:scale-95 shadow-lg border border-transparent hover:border-white/20 whitespace-nowrap flex items-center justify-center"
                     >
                       {service.cta}
                     </a>
@@ -196,8 +230,6 @@ const Services: React.FC = () => {
                     <span className="text-gray-400 font-mono text-sm bg-white/10 px-3 py-0.5 rounded-full">
                       {currentImageIndex + 1} / {selectedService.galleryImages.length}
                     </span>
-                    
-                    {/* Removed instruction text "Clique na imagem..." as requested */}
                 </div>
               </>
             ) : (

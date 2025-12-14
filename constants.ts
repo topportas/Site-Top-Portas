@@ -35,8 +35,8 @@ export const SERVICES: ServiceItem[] = [
     Icon: Wrench,
     cta: "Solicitar um orçamento agora!",
     link: "https://api.whatsapp.com/send/?phone=5562994360660&text=Quanto+%C3%A9+para+instalar+uma+porta+de+a%C3%A7o+aqui+para+mim%3F&type=phone_number&app_absent=0",
-    // Capa: Porta Automática
-    backgroundImage: `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20Autom%C3%A1tica.png`,
+    // Capa: Motor (Updated)
+    backgroundImage: `${PORTFOLIO_BASE}/Motor%20para%20Porta%20de%20Enrolar.png`,
     galleryImages: [
       `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20Autom%C3%A1tica.png`,
       `${PORTFOLIO_BASE}/Porta%20de%20A%C3%A7o%20de%20Enrolar%20Autom%C3%A1tica.png`,

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { WHATSAPP_LINK } from '../constants';
 
@@ -37,7 +36,7 @@ const FloatingWhatsApp: React.FC = () => {
       target="_blank"
       rel="noreferrer"
       style={{ bottom: `${bottomOffset}px` }}
-      className="fixed right-6 z-40 group transition-all duration-100 ease-out hover:-translate-y-1"
+      className="fixed right-6 z-[60] group transition-transform duration-300 ease-out hover:scale-105"
       aria-label="Chat on WhatsApp"
     >
       {/* Tooltip - Always visible now */}

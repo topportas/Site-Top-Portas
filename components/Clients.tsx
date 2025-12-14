@@ -1,10 +1,13 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { CLIENTS } from '../constants';
 
 const Clients: React.FC = () => {
-  // Create 3 sets to ensure width > screen width on large displays for seamless -33.33% loop
-  const loopClients = [...CLIENTS, ...CLIENTS, ...CLIENTS];
+  // Use 3 sets (Original + Clone + Clone).
+  // CSS animates -33.33% (1/3 of the width).
+  // This reduces DOM nodes compared to 4 sets, improving performance,
+  // while still covering 4k screens.
+  const loopClients = useMemo(() => [...CLIENTS, ...CLIENTS, ...CLIENTS], []);
 
   return (
     <section className="py-16 bg-white overflow-hidden min-h-[200px]">
@@ -25,32 +28,31 @@ const Clients: React.FC = () => {
   );
 };
 
-// Extracted to manage individual image error state
-const LogoItem: React.FC<{ name: string; url: string }> = ({ name, url }) => {
+// Memoized component to prevent re-renders during animation frames
+const LogoItem = React.memo(({ name, url }: { name: string; url: string }) => {
   const [error, setError] = useState(false);
 
   return (
-    <div className="mr-16 flex-shrink-0 flex items-center justify-center min-w-[120px] h-24">
+    <div className="mr-8 md:mr-16 flex-shrink-0 flex items-center justify-center min-w-[85px] md:min-w-[120px] h-16 md:h-24 transform-gpu">
       {!error ? (
         <img 
           src={url} 
           alt={name} 
-          loading="lazy"
-          decoding="async"
+          loading="eager" 
+          // 'sync' decoding forces the image to be ready before painting, avoiding white flashes/stutter
+          decoding="sync"
+          draggable="false"
           referrerPolicy="no-referrer"
-          // grayscale + brightness-0 turns any color logo into a solid black silhouette
-          // opacity-70 makes it slightly subtle, hover brings it to full black
-          className="h-full w-auto object-contain max-h-16 max-w-[160px] grayscale brightness-0 opacity-70 hover:opacity-100 transition-all duration-300"
+          className="h-full w-auto object-contain max-h-11 md:max-h-16 max-w-[110px] md:max-w-[160px] grayscale brightness-0 opacity-70 hover:opacity-100 transition-all duration-300 select-none"
           onError={() => setError(true)}
         />
       ) : (
-        // Fallback text if image fails to load
-        <span className="text-xl font-black text-gray-300 uppercase tracking-widest whitespace-nowrap">
+        <span className="text-sm md:text-xl font-black text-gray-300 uppercase tracking-widest whitespace-nowrap">
           {name}
         </span>
       )}
     </div>
   );
-};
+});
 
 export default Clients;

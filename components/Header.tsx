@@ -6,7 +6,7 @@ import { WHATSAPP_LINK, LOGO_URL } from '../constants';
 const Header: React.FC = () => {
   return (
     <header className="w-full bg-white shadow-[0_4px_20px_-5px_rgba(15,54,82,0.3)] sticky top-0 z-50">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo Area - Aligned Left */}
           <div className="flex-shrink-0 flex items-center justify-start">

@@ -23,7 +23,8 @@ const ContactSection: React.FC = () => {
                 height="100%" 
                 style={{ border: 0 }} 
                 loading="lazy"
-                className="grayscale group-hover:grayscale-0 transition-all duration-500"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale-0 transition-all duration-500"
              ></iframe>
           </div>
 
