@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { X, Sparkles, Loader2, Copy, Check } from 'lucide-react';
-import { generateQuoteMessage } from '../services/geminiService';
 import { AIQuoteRequest } from '../types';
 import { WHATSAPP_NUMBER } from '../constants';
 
@@ -22,17 +21,28 @@ const AiQuoteModal: React.FC<AiQuoteModalProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  const generateLocalMessage = (data: AIQuoteRequest) => {
+    return `Olá, gostaria de um orçamento para uma porta de aço.
+    
+Dados do pedido:
+- Largura: ${data.width} metros
+- Altura: ${data.height} metros
+- Tipo: ${data.type}
+- Urgência: ${data.urgency}
+
+Aguardo o retorno com o valor.`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStep('loading');
-    try {
-      const message = await generateQuoteMessage(formData);
+    
+    // Simula um pequeno delay para UX, dando sensação de processamento
+    setTimeout(() => {
+      const message = generateLocalMessage(formData);
       setGeneratedMessage(message);
       setStep('result');
-    } catch (error) {
-      console.error(error);
-      setStep('form');
-    }
+    }, 600);
   };
 
   const handleCopy = () => {
@@ -54,7 +64,7 @@ const AiQuoteModal: React.FC<AiQuoteModalProps> = ({ isOpen, onClose }) => {
         <div className="bg-brand-dark p-4 flex justify-between items-center">
           <div className="flex items-center gap-2 text-white">
             <Sparkles className="w-5 h-5 text-brand-accent" />
-            <h3 className="font-semibold text-lg">Assistente de Orçamento IA</h3>
+            <h3 className="font-semibold text-lg">Assistente de Orçamento</h3>
           </div>
           <button onClick={onClose} className="text-white/70 hover:text-white transition-colors">
             <X className="w-6 h-6" />
@@ -66,7 +76,7 @@ const AiQuoteModal: React.FC<AiQuoteModalProps> = ({ isOpen, onClose }) => {
           {step === 'form' && (
             <form onSubmit={handleSubmit} className="space-y-4">
               <p className="text-gray-600 text-sm mb-4">
-                Preencha os dados abaixo e nossa Inteligência Artificial irá criar uma mensagem perfeita para você enviar no WhatsApp.
+                Preencha os dados abaixo para gerar uma mensagem formatada e enviar no nosso WhatsApp.
               </p>
               
               <div className="grid grid-cols-2 gap-4">
@@ -136,7 +146,7 @@ const AiQuoteModal: React.FC<AiQuoteModalProps> = ({ isOpen, onClose }) => {
           {step === 'loading' && (
             <div className="py-12 flex flex-col items-center justify-center text-center">
               <Loader2 className="w-10 h-10 text-brand-dark animate-spin mb-4" />
-              <p className="text-gray-600 font-medium">A IA está escrevendo sua mensagem...</p>
+              <p className="text-gray-600 font-medium">Gerando rascunho...</p>
             </div>
           )}
 
