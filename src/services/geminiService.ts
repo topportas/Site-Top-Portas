@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { AIQuoteRequest } from "../types";
 
-// Inicializa a IA com a chave configurada no vite.config.ts (vinda da Vercel)
+// Inicializa a IA com a chave fornecida via vite.config.ts (process.env.API_KEY)
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateQuoteMessage = async (data: AIQuoteRequest): Promise<string> => {
@@ -32,6 +32,7 @@ export const generateQuoteMessage = async (data: AIQuoteRequest): Promise<string
     return response.text || "Erro ao gerar mensagem. Por favor, tente novamente.";
   } catch (error) {
     console.error("Erro na IA:", error);
+    // Fallback amigável caso ocorra algum erro de rede ou cota
     return `Olá! Gostaria de um orçamento para uma porta de aço ${data.type} medindo ${data.width}m x ${data.height}m. Minha urgência é: ${data.urgency}. Aguardo retorno!`;
   }
 };
