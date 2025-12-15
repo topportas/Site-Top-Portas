@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Sparkles, Loader2, Copy, Check } from 'lucide-react';
 import { AIQuoteRequest } from '../types';
 import { WHATSAPP_NUMBER } from '../constants';
+import { generateQuoteMessage } from '../services/geminiService';
 
 interface AiQuoteModalProps {
   isOpen: boolean;
@@ -21,27 +22,21 @@ const AiQuoteModal: React.FC<AiQuoteModalProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const generateLocalMessage = (data: AIQuoteRequest) => {
-    return `Olá, gostaria de um orçamento para uma porta de aço.
-    
-Dados do pedido:
-- Largura: ${data.width} metros
-- Altura: ${data.height} metros
-- Tipo: ${data.type}
-- Urgência: ${data.urgency}
-
-Aguardo o retorno com o valor.`;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStep('loading');
     
-    setTimeout(() => {
-      const message = generateLocalMessage(formData);
+    try {
+      // Chamada real para a API do Gemini
+      const message = await generateQuoteMessage(formData);
       setGeneratedMessage(message);
       setStep('result');
-    }, 600);
+    } catch (error) {
+      console.error("Falha ao gerar mensagem", error);
+      // Fallback simples caso a API falhe
+      setGeneratedMessage(`Olá, preciso de um orçamento para porta ${formData.type} de ${formData.width}x${formData.height}.`);
+      setStep('result');
+    }
   };
 
   const handleCopy = () => {
@@ -59,21 +54,23 @@ Aguardo o retorno com o valor.`;
     <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden relative">
         
+        {/* Header */}
         <div className="bg-brand-dark p-4 flex justify-between items-center">
           <div className="flex items-center gap-2 text-white">
             <Sparkles className="w-5 h-5 text-brand-accent" />
-            <h3 className="font-semibold text-lg">Assistente de Orçamento</h3>
+            <h3 className="font-semibold text-lg">Assistente de Orçamento IA</h3>
           </div>
           <button onClick={onClose} className="text-white/70 hover:text-white transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
 
+        {/* Content */}
         <div className="p-6">
           {step === 'form' && (
             <form onSubmit={handleSubmit} className="space-y-4">
               <p className="text-gray-600 text-sm mb-4">
-                Preencha os dados abaixo para gerar uma mensagem formatada e enviar no nosso WhatsApp.
+                Preencha os dados abaixo. Nossa Inteligência Artificial vai escrever a mensagem perfeita para agilizar seu atendimento no WhatsApp.
               </p>
               
               <div className="grid grid-cols-2 gap-4">
@@ -112,7 +109,7 @@ Aguardo o retorno com o valor.`;
                 >
                   <option>Automática</option>
                   <option>Manual</option>
-                  <option>Transvision</option>
+                  <option>Transvision (Perfurada)</option>
                   <option>Lâmina Fechada</option>
                 </select>
               </div>
@@ -135,7 +132,7 @@ Aguardo o retorno com o valor.`;
                 className="w-full bg-brand-dark text-white py-3 rounded-lg font-semibold hover:bg-brand-light transition-colors flex items-center justify-center gap-2 mt-4"
               >
                 <Sparkles className="w-4 h-4" />
-                Gerar Mensagem
+                Gerar Mensagem com IA
               </button>
             </form>
           )}
@@ -143,7 +140,7 @@ Aguardo o retorno com o valor.`;
           {step === 'loading' && (
             <div className="py-12 flex flex-col items-center justify-center text-center">
               <Loader2 className="w-10 h-10 text-brand-dark animate-spin mb-4" />
-              <p className="text-gray-600 font-medium">Gerando rascunho...</p>
+              <p className="text-gray-600 font-medium">A IA está escrevendo seu pedido...</p>
             </div>
           )}
 
